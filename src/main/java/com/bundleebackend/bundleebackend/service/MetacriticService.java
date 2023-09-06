@@ -1,7 +1,5 @@
 package com.bundleebackend.bundleebackend.service;
 
-import com.bundleebackend.bundleebackend.external_api_types.metacritic.MetacriticGame;
-import com.bundleebackend.bundleebackend.external_api_types.metacritic.MetacriticSearchGamesResponse;
 import org.json.JSONObject;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
