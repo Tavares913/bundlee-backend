@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/api/metacritic")
 public class MetacriticController {
-    private MetacriticService metacriticService;
+    MetacriticService metacriticService;
 
     @Autowired
     public MetacriticController(MetacriticService metacriticService) {
