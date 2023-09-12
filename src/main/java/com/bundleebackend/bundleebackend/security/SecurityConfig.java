@@ -26,20 +26,19 @@ import javax.sql.DataSource;
 public class SecurityConfig {
     @Autowired
     private UserRepository userRepository;
-    @Autowired
-    private JwtFilter jwtFilter;
+//    @Autowired
+//    private JwtFilter jwtFilter;
 
     @Bean
     public UserDetailsManager userDetailsManager(DataSource dataSource) {
         JdbcUserDetailsManager userDetailsManager = new JdbcUserDetailsManager(dataSource);
-        userDetailsManager.setUsersByUsernameQuery("select id, password from users where id=?");
         return userDetailsManager;
     }
 
-    @Bean
-    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-        return authConfig.getAuthenticationManager();
-    }
+//    @Bean
+//    public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+//        return authConfig.getAuthenticationManager();
+//    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -47,17 +46,19 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth ->
                                 auth.requestMatchers("/api/metacritic/games").permitAll()
                                         .requestMatchers("/api/auth/login").permitAll()
-                                        .anyRequest().authenticated()
+                                        .requestMatchers("/users").permitAll()
+                                        .requestMatchers("users/**").permitAll()
+                                        .requestMatchers("/").permitAll()
+                                        .requestMatchers("/**").permitAll()
                 )
                         .sessionManagement(sess ->
                                 sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                         );
-        http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }

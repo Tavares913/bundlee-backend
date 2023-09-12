@@ -16,8 +16,6 @@ public class JwtUtil {
     private String secretKey;
 
     public String generateToken(User user) {
-        System.out.println(user);
-        System.out.println(secretKey);
         String token =  Jwts.builder()
                 .setSubject(user.getId() + "," + user.getUsername())
                 .setIssuer("bundlee-backend")
@@ -33,7 +31,6 @@ public class JwtUtil {
             Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token);
             return true;
         } catch (SignatureException ex) {
-            System.out.println("Token parsing error.");
             return false;
         }
     }
@@ -43,9 +40,5 @@ public class JwtUtil {
                 .parseClaimsJws(token)
                 .getBody()
                 .getSubject();
-    }
-
-    public void test() {
-        System.out.println("good");
     }
 }
