@@ -24,6 +24,8 @@ public class Collection {
         joinColumns = @JoinColumn(name = "collection_id"),
         inverseJoinColumns = @JoinColumn(name = "individual_id"))
     private List<Individual> individuals;
+    @ManyToMany(mappedBy = "favouritedCollections")
+    private List<User> usersThatFavourited;
 
     public Collection() {}
 

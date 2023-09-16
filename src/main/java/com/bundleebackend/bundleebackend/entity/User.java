@@ -23,6 +23,11 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user")
     private List<Collection> collections;
+    @ManyToMany
+    @JoinTable(name = "collection_favourite",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "collection_id"))
+    private List<Collection> favouritedCollections;
 
     public User() {}
 
