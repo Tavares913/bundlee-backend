@@ -205,4 +205,8 @@ public class CollectionController {
         updatedIndividual.setThumbnailLink(individual.getThumbnailLink());
         return individualRepository.save(updatedIndividual);
     }
+
+    public String test() {
+        return "test";
+    }
 }
